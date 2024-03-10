@@ -1,29 +1,41 @@
 package br.com.desafio.itau.crud.model;
 
+import br.com.desafio.itau.crud.enums.RoleEnum;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static jakarta.persistence.CascadeType.ALL;
 
+
+@Getter
+@Setter
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "Usuario")
-public class UsuarioModel {
+public class UsuarioModel implements UserDetails{
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer usuarioId;
     @Column(unique = true)
     private String login;
-
     private Double valorTotal;
     private String senha;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
+
+    private RoleEnum role;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<DesejosModel> Desejo;
+
+    public UsuarioModel(UsuarioModel usuarioModel) {
+    }
 
 
     public String getSenha() {
@@ -58,5 +70,55 @@ public class UsuarioModel {
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
+
+    public RoleEnum getRole() {
+        return role;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.login;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.role == RoleEnum.ADMIN){
+            return List.of(
+                    new SimpleGrantedAuthority("ROLE_ADMIN"),
+                    new SimpleGrantedAuthority("ROLE_USER")
+            );
+
+        }
+        return List.of(
+                new SimpleGrantedAuthority(("ROLE_USER"))
+        );
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
 }
+
 

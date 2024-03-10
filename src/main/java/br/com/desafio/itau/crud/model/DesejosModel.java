@@ -19,7 +19,7 @@ public class DesejosModel {
 
     private  String objetivo;
     private  Double valor;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuarioId")
     UsuarioModel usuario;
 
