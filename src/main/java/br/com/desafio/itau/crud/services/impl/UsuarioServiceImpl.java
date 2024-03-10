@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -33,6 +34,33 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setSenha(senhaEncriptada);
 
         return usuarioRepository.save(usuario);
+    }
+    @Override
+    public String operacaoValor(String login, int operacao, Double valorOperacao) {
+
+        Optional<UsuarioModel> usuario = usuarioRepository.findBylogin(login);
+        Double valor = usuario.get().getValorTotal();
+
+        if (valorOperacao.isNaN()) usuario.get().setValorTotal(0.0);
+
+        switch (operacao) {
+            case 1 -> {
+                Double adicao = valor + valorOperacao;
+                usuario.get().setValorTotal(adicao);
+                usuarioRepository.save(usuario.get());
+                return "Valor Adicionado!! \t Novo valor: " + adicao.toString();
+            }
+            case 2 -> {
+                Double subtracao = valor - valorOperacao;
+                usuario.get().setValorTotal(subtracao);
+                usuarioRepository.save(usuario.get());
+                return "Valor subtraido!! \t Novo valor: " + subtracao.toString();
+            }
+            default -> {
+                return "Operação Inválida";
+            }
+
+        }
     }
 
 }

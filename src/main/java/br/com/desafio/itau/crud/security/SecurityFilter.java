@@ -31,11 +31,11 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         String token = extraiTokenHeader(request);
 
-        if (token != null){
+        if (token != null) {
             String login = autenticacaoService.validaTokenJwt(token);
             UsuarioModel usuario = repository.findBylogin(login).get();
 
-            var autentication = new UsernamePasswordAuthenticationToken(usuario , null, usuario.getAuthorities());
+            var autentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
 
             SecurityContextHolder.getContext().setAuthentication(autentication);
 
@@ -46,10 +46,10 @@ public class SecurityFilter extends OncePerRequestFilter {
     }
 
 
-    public String extraiTokenHeader(HttpServletRequest request){
+    public String extraiTokenHeader(HttpServletRequest request) {
         var authHeather = request.getHeader("Authorization");
 
-        if (authHeather == null){
+        if (authHeather == null) {
             return null;
         }
 

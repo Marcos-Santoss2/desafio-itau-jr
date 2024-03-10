@@ -28,8 +28,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-
-    @GetMapping("/listarTodos")
+    @GetMapping("/listar")
     public ResponseEntity<List<UsuarioModel>> listarTodos(){
 
         return ResponseEntity.ok(usuarioService.listarTodos());
@@ -41,27 +40,12 @@ public class UsuarioController {
         return  ResponseEntity.ok(usuarioService.salvarUsuario(usuario));
     }
 
-//    @GetMapping("/validarSenha")
-//    public ResponseEntity<Boolean> validarSenha (@RequestParam String login,
-//                                                 @RequestParam String senha) {
-//
-//        Optional<UsuarioModel> optUsuario = repository.findBylogin(login);
-//
-//        if(optUsuario.isEmpty()) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
-//        }
-//
-//        UsuarioModel usuario = optUsuario.get();
-//
-//        boolean valid = encoder.matches(senha, usuario.getSenha());
-//        HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
-//
-//        return ResponseEntity.status(status).body(valid);
-//    }
+    @PostMapping("/{login}/operacaoValor")
+    public ResponseEntity<String> operacaoValor(@PathVariable(name = "login") String login,
+                                                @RequestParam int operacao,
+                                                @RequestParam Double valorOperacao) {
 
-
-
-
-
+        return ResponseEntity.ok(usuarioService.operacaoValor(login, operacao, valorOperacao));
+    }
 
 }

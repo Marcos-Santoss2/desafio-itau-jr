@@ -11,4 +11,8 @@ public interface UsuarioService {
     public List<UsuarioModel> listarTodos();
 
     public UsuarioModel salvarUsuario(UsuarioModel usuario);
+
+    public String operacaoValor(String login, int operacao, Double valorOperacao);
+
+
 }
