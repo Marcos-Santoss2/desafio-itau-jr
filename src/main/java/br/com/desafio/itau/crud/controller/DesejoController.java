@@ -5,6 +5,7 @@ import br.com.desafio.itau.crud.model.UsuarioModel;
 import br.com.desafio.itau.crud.repository.DesejoRepository;
 import br.com.desafio.itau.crud.repository.UsuarioRepository;
 import br.com.desafio.itau.crud.services.DesejoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/usuario/")
+@Tag(name = "Desejos", description = "Manipulação dos desejos do usuario")
 public class DesejoController {
 
 

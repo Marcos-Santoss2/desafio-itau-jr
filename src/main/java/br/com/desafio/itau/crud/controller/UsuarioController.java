@@ -6,6 +6,7 @@ import br.com.desafio.itau.crud.repository.DesejoRepository;
 import br.com.desafio.itau.crud.repository.UsuarioRepository;
 import br.com.desafio.itau.crud.services.UsuarioService;
 import br.com.desafio.itau.crud.services.impl.UsuarioServiceImpl;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/usuario")
+@Tag(name = "Usuario", description = "Manipulação do usuarios")
 public class UsuarioController {
 
     @Autowired

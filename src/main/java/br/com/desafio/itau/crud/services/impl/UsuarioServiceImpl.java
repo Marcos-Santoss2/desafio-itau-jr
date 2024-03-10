@@ -59,7 +59,6 @@ public class UsuarioServiceImpl implements UsuarioService {
             default -> {
                 return "Operação Inválida";
             }
-
         }
     }
 

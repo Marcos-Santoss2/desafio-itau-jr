@@ -27,8 +27,6 @@ public class AutencacaoServiceImpl implements AutenticacaoService {
     public AutencacaoServiceImpl(UsuarioRepository repository) {
         this.repository = repository;
     }
-
-
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         Optional<UsuarioModel> usuario = repository.findBylogin(login);
