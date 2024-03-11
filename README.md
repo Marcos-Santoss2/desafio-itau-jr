@@ -1,6 +1,8 @@
 # API Básica de Finanças
 
-Este projeto é uma API básica de finanças desenvolvida como parte de um desafio. Ela permite gerenciar transações financeiras, autenticar usuários e documentar a API usando o Swagger.
+Este projeto é uma API básica de finanças desenvolvida como parte de um desafio. Ela permite gerenciar transações financeiras, autenticar usuários e documentar a API usando o Spring Boot.
+
+![Arquitetura](Arquitetura.jpg)
 
 ## Tecnologias Utilizadas
 
@@ -9,6 +11,10 @@ Este projeto é uma API básica de finanças desenvolvida como parte de um desaf
 - **JWT (JSON Web Token)**: Para autenticação baseada em tokens.
 - **Swagger**: Para documentação da API.
 
+## Implantação na AWS
+
+Este projeto já está implantado em uma instância EC2 na AWS. Você pode acessar a API através do IP público da instância na porta 8080.
+:
 ## Funcionalidades
 
 1. **Autenticação e Autorização**:
